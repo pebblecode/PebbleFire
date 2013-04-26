@@ -15,6 +15,24 @@
         <Binding Source="{StaticResource ViewModelLocator}" Path="MainViewModel"/>
     </Window.DataContext>
 
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Resources>
+                            <SolidColorBrush x:Key="BlackBrush" Color="White" />
+                        </Rectangle.Resources>
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cog}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Margin="10, 0, 0, 0" Text="settings" Foreground="White" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
