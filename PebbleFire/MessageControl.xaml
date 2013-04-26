@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
             <Image Source="http://nuget.org/Content/Images/packageDefaultIcon-50x50.png" />
         </Grid>
-        <TextBox Grid.Column="1" Text="blah, blah" IsReadOnly="True">
+        <TextBox Grid.Column="1" Text="{Binding Text}" IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3"/>
