@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace PebbleFire
 {
@@ -19,6 +21,8 @@ namespace PebbleFire
             AddRooms();
 
             SelectedRoom = Rooms.FirstOrDefault();
+
+            SettingsCommand = new RelayCommand(() => ShowSettings());
         }
 
         private void AddRooms()
@@ -47,6 +51,8 @@ namespace PebbleFire
             }
         }
 
+        public ICommand SettingsCommand { get; private set; }
+
         private void UnselectRoom()
         {
             SelectRoom(false);
@@ -69,6 +75,10 @@ namespace PebbleFire
             {
                 SelectedRoom = room;
             }
+        }
+
+        private void ShowSettings()
+        {
         }
     }
 }

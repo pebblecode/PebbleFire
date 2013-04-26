@@ -17,7 +17,8 @@
 
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button>
+            <Button
+                Command="{Binding SettingsCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Resources>
@@ -55,10 +56,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Controls:TransitioningContentControl
-                Transition="LeftTransition">
-                <ContentControl 
-                    Content="{Binding SelectedRoom}"
-                    ContentTemplate="{StaticResource RoomMessagesTemplate}" />
+                Transition="LeftReplaceTransition"
+                Content="{Binding SelectedRoom}">
             </Controls:TransitioningContentControl>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
