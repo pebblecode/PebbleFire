@@ -18,7 +18,7 @@
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
             <Button
-                Command="{Binding SettingsCommand}">
+                Command="{Binding OpenSettingsCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Resources>
@@ -34,42 +34,89 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
     
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ListBox
-				ItemTemplate="{StaticResource RoomListBoxItemTemplate}"
-				ItemsSource="{Binding Path=Rooms}"
-				HorizontalContentAlignment="Stretch"
-				ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-        </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Controls:TransitioningContentControl
-                Transition="LeftReplaceTransition"
-                Content="{Binding SelectedRoom}">
-            </Controls:TransitioningContentControl>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox MinHeight="50"/>
-                <StackPanel Grid.Column="1">
+    <TabControl>
+        <TabItem
+            Visibility="Collapsed"
+            IsSelected="{Binding IsMainViewSelected}">
+            <Controls:MetroContentControl>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ListBox
+                            ItemTemplate="{StaticResource RoomListBoxItemTemplate}"
+                            ItemsSource="{Binding Path=Rooms}"
+                            HorizontalContentAlignment="Stretch"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Controls:TransitioningContentControl
+                            Transition="LeftReplaceTransition"
+                            Content="{Binding SelectedRoom}">
+                        </Controls:TransitioningContentControl>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox MinHeight="50"/>
+                            <StackPanel Grid.Column="1">
+                                <Button
+                                    Content="Send" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Controls:MetroContentControl>
+        </TabItem>
+        <TabItem
+            Visibility="Collapsed"
+            IsSelected="{Binding IsSettingsViewSelected}">
+            <Controls:MetroContentControl>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Content="Campfire Subdomain:"/>
+                    <TextBox
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Text=""/>
+
+                    <Label Grid.Row="1" Content="Authentication Token:"/>
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Text=""/>
+                    
                     <Button
-                        Content="Send" />
-                </StackPanel>
-            </Grid>
-        </Grid>
-    </Grid>
+                        Padding="20, 10"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Command="{Binding CloseSettingsCommand}"
+                        Content="OK"/>
+                </Grid>
+            </Controls:MetroContentControl>
+        </TabItem>
+    </TabControl>
 </Controls:MetroWindow>

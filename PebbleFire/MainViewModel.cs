@@ -16,13 +16,15 @@ namespace PebbleFire
         public MainViewModel(ICampfireService campfireService)
         {
             this.campfireService = campfireService;
+            IsMainViewSelected = true;
 
             Rooms = new ObservableCollection<RoomViewModel>();
             AddRooms();
 
             SelectedRoom = Rooms.FirstOrDefault();
 
-            SettingsCommand = new RelayCommand(() => ShowSettings());
+            OpenSettingsCommand = new RelayCommand(() => OpenSettings());
+            CloseSettingsCommand = new RelayCommand(() => CloseSettings());
         }
 
         private void AddRooms()
@@ -51,7 +53,10 @@ namespace PebbleFire
             }
         }
 
-        public ICommand SettingsCommand { get; private set; }
+        public bool IsMainViewSelected { get; set; }
+        public bool IsSettingsViewSelected { get; set; }
+        public ICommand OpenSettingsCommand { get; private set; }
+        public ICommand CloseSettingsCommand { get; private set; }
 
         private void UnselectRoom()
         {
@@ -77,8 +82,23 @@ namespace PebbleFire
             }
         }
 
-        private void ShowSettings()
+        private void OpenSettings()
         {
+            OpenOrCloseSettings(true);
+        }
+
+        private void OpenOrCloseSettings(bool open)
+        {
+            IsSettingsViewSelected = open;
+            IsMainViewSelected = !open;
+            RaisePropertyChanged(() => IsSettingsViewSelected);
+            RaisePropertyChanged(() => IsMainViewSelected);
+
+        }
+
+        private void CloseSettings()
+        {
+            OpenOrCloseSettings(false);
         }
     }
 }
